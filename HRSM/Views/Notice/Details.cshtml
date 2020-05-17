@@ -1,0 +1,51 @@
+﻿@model HRSM.Models.Notice
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#noticeItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Notice/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">公告管理</a></li>
+        <li><a href="#">查看公告</a></li>
+    </ul>
+</div>
+
+<div class="formbody">
+    <div class="formtitle"><span>基本信息</span></div>
+    <ul class="forminfo">
+        <li><label>标题</label><cite>@Html.DisplayFor(model => model.Title) </cite ></li>
+        <li><label>发布时间</label><cite>@Html.DisplayFor(model => model.CreateTime)</cite></li>
+        <li><label>发布人</label><cite>@Html.DisplayFor(model => model.Teacher.Name)</cite></li>
+        <li><label>内容</label><cite>@Html.DisplayFor(model => model.Content)</cite></li>
+        <li>
+            <label>附件</label>
+            @if (Model.Attachment != null && Model.Attachment != "")
+            {
+                <div id="attach">
+                    <a href="/Home/Down?file=@Model.Attachment" class="tablelink" style="color:red;font-size:15px;">下载</a>
+                </div>
+            }
+            else
+            {
+                <cite>无附件</cite>
+            }
+        </li>
+        <li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="返回" />
+        </li>
+    </ul>
+</div>

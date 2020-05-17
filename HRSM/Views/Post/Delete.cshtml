@@ -1,0 +1,77 @@
+﻿@model HRSM.Models.Post
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#postItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Post/Index";
+        });
+        $("#btnDelete").click(function () {//显示警告对话框
+            $(".tip").fadeIn(200);
+        });
+        $(".tiptop a").click(function () {//关闭对话框
+            $(".tip").fadeOut(200);
+        });
+        $(".sure").click(function () {//点击对话框上确定按钮提交请求
+            $(".tip").fadeOut(100);
+        });
+
+        $(".cancel").click(function () {
+            $(".tip").fadeOut(100);//点击对话框上的取消按钮隐藏对话框
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">招聘岗位</a></li>
+        <li><a href="#">删除招聘岗位</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        @Html.HiddenFor(model => model.ID)
+        <ul class="forminfo">
+            <li><label>招聘公司</label>@Html.DropDownListFor(p => p.Company_ID, (IEnumerable<SelectListItem>)ViewBag.Company_IDs, new { @class = "dfselect", @disabled = "disabled" })<i> @Html.ValidationMessageFor(model => model.Company_ID, "", new { @class = "text-danger" })</i></li>
+            <li><label>岗位名称</label>@Html.TextBoxFor(p => p.Name, new { @class = "dfinput", @disabled = "disabled" })<i> @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</i></li>
+            <li><label>URL</label>@Html.TextBoxFor(p => p.URL, new { @class = "dfinput", @disabled = "disabled" })<i>@Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })</i></li>
+            <li><label>岗位类型</label>@Html.DropDownListFor(p => p.Type, (IEnumerable<SelectListItem>)ViewBag.Types, new { @class = "dfselect", @disabled = "disabled" })<i>@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })</i></li>
+            <li><label>岗位介绍</label>@Html.TextAreaFor(p => p.Desc, new { @class = "dftextarea2", @disabled = "disabled" })<i>@Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })</i></li>
+            <li><label>招聘人数</label>@Html.TextBoxFor(p => p.Num, new { @class = "dfinput", @disabled = "disabled" })<i>@Html.ValidationMessageFor(model => model.Num, "", new { @class = "text-danger" })</i></li>
+            <li><label>面试人数/班</label>@Html.TextBoxFor(p => p.InterNum, new { @class = "dfinput", @disabled = "disabled" })<i>@Html.ValidationMessageFor(model => model.InterNum, "", new { @class = "text-danger" })</i></li>
+            <li>
+                <label>&nbsp;</label><input id="btnDelete" name="btnDelete" type="button" class="btn" value="删除" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+
+        <div class="tipinfo">
+            <span><img src="~/images/ticon.png" /></span>
+            <div class="tipright">
+                <p>是否确认对信息的删除 ？</p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+        </div>
+
+        <div class="tipbtn">
+            <input name="" type="submit" class="sure" value="确定" />&nbsp;
+            <input name="" type="button" class="cancel" value="取消" />
+        </div>
+    </div>
+}
+

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<HRSM.Models.Dict>
+
+@{
+    ViewBag.Title = "系统字典管理页";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#dictItem").addClass("active");//系统字典选中
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">系统字典</a></li>
+    </ul>
+</div>
+
+<div class="rightinfo" style=" border:0px solid red;">
+    <div class="tools" style=" border:0px solid green;">
+        <ul class="toolbar">
+            <li class=""><a  href="/Dict/Create"><span><img src="~/images/t01.png" /></span>添加</a></li>
+        </ul>
+        <ul class="toolbar1">
+            <li><span><img src="~/images/t05.png" /></span>设置</li>
+        </ul>
+        <div style="clear:both"></div>
+    </div>
+    <table class="tablelist">
+        <thead>
+            <tr>
+                <th>编号<i class="sort"><img src="~/images/px.gif" /></i></th>
+                <th>代码类型名</th>
+                <th>代码名</th>
+                <th>代码值</th>
+                <th>显示顺序</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewData["dicts"] as List<HRSM.Models.Dict>)
+            {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.TypeName
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Value
+                </td>
+                <td>
+                    @item.Sort
+                </td>
+                <td>
+                    <a href="/Dict/Edit/@item.ID" class="tablelink">编辑</a>|
+                    <a href="/Dict/Details/@item.ID" class="tablelink">查看</a>|
+                    <a href="/Dict/Delete/@item.ID" class="tablelink">删除</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagin">
+        <div class="message">共<i class="blue">3</i>条记录，当前显示第&nbsp;<i class="blue">1&nbsp;</i>页</div>
+        <ul class="paginList">
+            <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
+            <li class="paginItem"><a href="javascript:;">1</a></li>
+            <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.tablelist tbody tr:odd').addClass('odd');
+</script>

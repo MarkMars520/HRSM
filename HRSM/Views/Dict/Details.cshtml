@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#dictItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/dict/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">系统字典</a></li>
+        <li><a href="#"> 查看字典</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>基本信息</span></div>
+    <ul class="forminfo">
+        <li><label>代码类型名</label><input name="TypeName" type="text" class="dfinput" value="@ViewBag.Dict.TypeName" disabled="disabled" /></li>
+        <li><label>代码名</label><input name="Name" type="text" class="dfinput" value="@ViewBag.Dict.Name" disabled="disabled" /></li>
+        <li><label>代码值</label><input name="Value" type="text" class="dfinput" value="@ViewBag.Dict.Value" disabled="disabled" /></li>
+        <li><label>顺序</label><input name="Sort" type="text" class="dfinput" value="@ViewBag.Dict.Sort" disabled="disabled" /></li>
+        <li>
+            <input id="btnBack" name="btnBack" type="button" class="btn" value="返回" />
+        </li>
+    </ul>
+</div>
+

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#gradeItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Grade/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">专业班信息</a></li>
+        <li><a href="#">查看专业班</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>基本信息</span></div>
+    <ul class="forminfo">
+        <li><label>班名称</label><cite>@ViewBag.Grade.Name</cite></li>
+        <li><label>专业</label><cite>@ViewBag.Grade.Profession</cite></li>
+        <li><label>M专业</label><cite>@ViewBag.Grade.MProfession</cite></li>
+        <li><label>技术顾问</label><cite>@ViewBag.Grade.Teacher1.Name</cite></li>
+        <li><label>辅导员</label><cite>@ViewBag.Grade.Teacher.Name</cite></li>
+        <li>
+            <input id="btnBack" name="btnBack" type="button" class="btn" value="返回" />
+        </li>
+    </ul>
+</div>

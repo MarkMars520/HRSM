@@ -1,0 +1,56 @@
+﻿@model HRSM.Models.Notice
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#noticeItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/notice/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">公告管理</a></li>
+        <li><a href="#">编辑公告</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm("Edit", "Notice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="formbody">
+    <div class="formtitle"><span>基本信息</span></div>
+    @Html.HiddenFor(model => model.ID)
+    <ul class="forminfo">
+        <li><label>标题</label> @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "dfinput" } })<i> @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</i></li>
+        <li><label>发布时间</label>@Html.EditorFor(model => model.CreateTime, new { htmlAttributes = new { @class = "dfinput" } })<i> @Html.ValidationMessageFor(model => model.CreateTime, "", new { @class = "text-danger" })</i></li>
+        <li><label>发布人</label> @Html.DropDownList("Creator", null, htmlAttributes: new { @class = "dfselect" })<i>@Html.ValidationMessageFor(model => model.Creator, "", new { @class = "text-danger" })</i></li>
+        <li><label>内容</label>@Html.TextAreaFor(model => model.Content, new  { @class = "dftextarea" })<i>@Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })</i></li>
+        <li>
+            <label>附件</label>
+            @if (Model.Attachment != null && Model.Attachment != "")
+            {
+                <div id="attach">
+                    @Html.HiddenFor(model => model.Attachment)
+                    <a href="/Home/Down?file=@Model.Attachment" class="tablelink" style="color:red;font-size:15px;">下载</a>
+                    <a href="#" class="tablelink" onclick="$('#Attachment').val(); $('#attach').remove(); return false;" style="color:red;font-size:15px;">删除</a>
+                </div>
+            }
+            <input id="file2" name="file" type="file" /> <i></i>
+        </li>
+        <li>
+            <label>&nbsp;</label><input name="btnSave" type="submit" class="btn" value="确认保存" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+        </li>
+    </ul>
+</div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}

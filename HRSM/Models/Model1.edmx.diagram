@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4fafd85a4e7641229b10d1282aa456b4" Name="Diagram1">
+        <EntityTypeShape EntityType="HRSMDBModel.Company" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Dict" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Grade" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Interview" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Notice" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Post" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Student" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSMDBModel.Teacher" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="HRSMDBModel.FK__Company__Creator__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Post__Company_ID__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Grade__Counsello__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Grade__Lecturer__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Student__Grade_I__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Interview__Post___49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Interview__Stude__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSMDBModel.FK__Notice__Creator__1CF15040" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,72 @@
+﻿@model  IEnumerable<HRSM.Models.Company>
+<div id=" searchresults">
+    <table class="tablelist">
+        <thead>
+            <tr>
+                <th>编号<i class="sort"><img src="~/images/px.gif" /></i></th>
+                <th>公司名</th>
+                <th>工作地点</th>
+                <th>面试时间</th>
+                <th>报名截止时间</th>
+                <th>面试形式</th>
+                <th>状态</th>
+                <th>发布人</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InterTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StopTime)
+                    </td>
+                    <td>
+                        @if (item.InterType == "0")
+                        {
+                            <label>来校</label>
+                        }
+                        else if (item.InterType == "1")
+                        {
+                            <label>视频</label>
+                        }
+                        else if (item.InterType == "2")
+                        {
+                            <label>电话</label>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Statu == "0")
+                        {
+                            <label>招聘中</label>
+                        }
+                        else
+                        {
+                            <label>已结束</label>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Teacher.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = item.ID }, new { @class = "tablelink" }) |
+                        @Html.ActionLink("详情", "Details", new { id = item.ID }, new { @class = "tablelink" }) |
+                        @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { @class = "tablelink" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

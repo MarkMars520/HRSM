@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/mainlayout.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.metadata.js"></script>
+    <script src="~/Scripts/jquery.validate.messages_cn.js"></script>
+    <link href="~/css/Site.css" rel="stylesheet" />
+    <!--支持ajax请求-->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!--列表页表格样式-->
+    <script src="~/Scripts/tablelist.js"></script>
+    <script type="text/javascript">
+        function searchFailed() {
+            $("#searchresults").html("查询异常！！");
+        }
+    </script>
+
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <!--顶端logo-->
+           @Html.Partial("_PartialTop")
+        </div>
+        <div id="main">
+            <div id="menu">
+                <!--左端菜单-->
+                @Html.Partial("_PartialMenu")
+            </div>
+            <div id="content">
+                <!--右侧内容:插入内容-->
+                @RenderBody()
+            </div>
+        </div>
+        <div id="footer">
+            <!--底部版权-->
+            @Html.Partial("_PartialBottom")
+        </div>
+    </div>
+    <div>
+    </div>
+</body>
+</html>
+

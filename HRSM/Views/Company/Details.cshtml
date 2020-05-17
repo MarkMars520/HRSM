@@ -1,0 +1,114 @@
+﻿@model HRSM.Models.Company
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#companyItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Company/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">招聘企业</a></li>
+        <li><a href="#">查看企业</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        @Html.HiddenFor(model => model.ID)
+        <ul class="forminfo">
+            <li><label>公司名</label><cite>@Model.Title</cite></li>
+            <li><label>城市</label><cite>@Model.City</cite></li>
+            <li><label>网址</label><cite>@Model.URL</cite></li>
+            <li><label>公司介绍</label><cite><textarea class="dftextarea3">@Model.Desc</textarea></cite></li>
+            <li><label>发布人</label><cite>@Model.Teacher.Name</cite></li>
+            <li><label>面试时间</label><cite>@Model.InterTime</cite></li>
+            <li><label>报名截止时间</label><cite>@Model.StopTime</cite></li>
+            <li>
+                <label>面试类型</label>
+                @if (Model.InterType == "0")
+                {
+                    <cite>来校</cite>
+                }
+                else if (Model.InterType == "1")
+                {
+                    <cite>视频</cite>
+                }
+                else if (Model.InterType == "2")
+                {
+                    <cite>电话</cite>
+                }
+            </li>
+            <li>
+                <label>状态</label>
+                @if (Model.Statu == "0")
+                {
+                    <cite>招聘中</cite>
+                }
+                else
+                {
+                    <cite>已结束</cite>
+                }
+            </li>
+            <li>
+                <table class="tablelist">
+                    <thead>
+                        <tr>
+                            <th>编号<i class="sort"><img src="~/images/px.gif" /></i></th>
+                            <th>岗位名称</th>
+                            <th>岗位类型</th>
+                            <th>岗位介绍</th>
+                            <th>招聘人数</th>
+                            <th>面试人数/班</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Post)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @if (item.Desc != null)
+                                    {
+                                        <lable>@item.Desc.Substring(0, 100)+"......"</lable>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Num)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterNum)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <input id="btnBack" name="btnBack" type="button" class="btn" value="返回" />
+            </li>
+        </ul>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}

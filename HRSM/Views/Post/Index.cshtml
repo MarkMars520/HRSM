@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HRSM.Models.Post>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#postItem").addClass("active");
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">招聘岗位</a></li>
+    </ul>
+</div>
+
+<div class="rightinfo" style=" border:0px solid red;">
+    <div class="tools" style=" border:0px solid green;">
+        <ul class="toolbar">
+            <li class=""><a href="/Post/Create"><span><img src="~/images/t01.png" /></span>添加</a></li>
+        </ul>
+        <ul class="toolbar1">
+            <li><span><img src="~/images/t05.png" /></span>设置</li>
+        </ul>
+        <div style="clear:both"></div>
+    </div>
+    <table class="tablelist">
+        <thead>
+            <tr>
+                <th>编号<i class="sort"><img src="~/images/px.gif" /></i></th>
+                <th>岗位名称</th>
+                <th>岗位介绍</th>
+                <th>岗位类型</th>
+                <th>招聘人数</th>
+                <th>面试人数/班</th>
+                <th>招聘公司</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a href="@item.URL" target="_blank" class="tablelink">岗位介绍</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Num)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InterNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company.Title)
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = item.ID }, new { @class = "tablelink" }) |
+                        @*@Html.ActionLink("查看", "Details", new { id = item.ID }, new { @class = "tablelink" }) |*@
+                        @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { @class = "tablelink" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $('.tablelist tbody tr:odd').addClass('odd');
+</script>

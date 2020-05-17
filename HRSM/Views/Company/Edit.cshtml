@@ -1,0 +1,49 @@
+﻿@model HRSM.Models.Company
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#companyItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Company/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">招聘企业</a></li>
+        <li><a href="#">编辑企业</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        @Html.HiddenFor(model => model.ID)
+        <ul class="forminfo">
+            <li><label>公司名</label>@Html.TextBoxFor(c => c.Title, new { @class = "dfinput" })<i>不能超过20个字符 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</i></li>
+            <li><label>城市</label>@Html.TextBoxFor(c => c.City, new { @class = "dfinput" })<i> @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })</i></li>
+            <li><label>面试时间</label>@Html.TextBoxFor(c => c.InterTime, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(model => model.InterTime, "", new { @class = "text-danger" })</i></li>
+            <li><label>报名截止时间</label>@Html.TextBoxFor(c => c.StopTime, new { @class = "dfinput" }) <i>@Html.ValidationMessageFor(model => model.StopTime, "", new { @class = "text-danger" })</i></li>
+            <li><label>网址</label>@Html.TextBoxFor(c => c.URL, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })</i></li>
+            <li><label>面试类型</label>@Html.DropDownListFor(n => n.InterType, (IEnumerable<SelectListItem>)ViewBag.InterTypes, new { @class = "dfselect" })<i>@Html.ValidationMessageFor(model => model.InterType, "", new { @class = "text-danger" })</i></li>
+            <li><label>状态</label>@Html.DropDownListFor(n => n.Statu, (IEnumerable<SelectListItem>)ViewBag.Status, new { @class = "dfselect" })<i>@Html.ValidationMessageFor(model => model.Statu, "", new { @class = "text-danger" })</i></li>
+            <li><label>发布人</label>@Html.DropDownListFor(n => n.Creator, (IEnumerable<SelectListItem>)ViewBag.Creators, new { @class = "dfselect" })<i>@Html.ValidationMessageFor(model => model.Creator, "", new { @class = "text-danger" })</i></li>
+            <li><label>公司介绍</label>@Html.TextAreaFor(n => n.Desc, new { @class = "dftextarea2" })<i>@Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })</i></li>
+            <li>
+                <label>&nbsp;</label><input name="btnSave" type="submit" class="btn" value="确认保存" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}

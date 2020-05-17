@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#gradeItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Grade/Index";
+        });
+        CheckForm();
+    });
+    function CheckForm() {
+        $("#editFrm").validate({
+            rules: {
+                Name: { required: true, maxlength: 20 },//班名称非空,长度不能超过20
+                Profession: { required: true },
+                MProfession: { required: true },
+                Lecturer: { required: true },
+                Counsellor: { required: true }
+            },
+            messages: {
+                Name: { required: "请输入班名称！", maxlength: "错误：不能超过20个字符" },
+                Profession: { required: "请选择专业！" },
+                MProfession: { required: "请选择M专业！" },
+                Lecturer: { required: "请选择技术顾问！" },
+                Counsellor: { required: "请选择辅导员！" }
+            },
+            errorElement: "i",//错误信息显示标签名
+            errorClass: "invalid"//错误信息及标签样式
+        });
+    }
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">专业班信息</a></li>
+        <li><a href="#">编辑专业班</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm("Edit", "Grade", FormMethod.Post, new { id = "editFrm", name = "editFrm" }))
+{
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        @Html.Hidden("ID", ViewBag.Grade.ID as string)
+        <ul class="forminfo">
+            <li><label>班名称</label>@Html.TextBox("Name", ViewBag.Grade.Name as string, new { @class = "dfinput" })<i></i></li>
+            <li><label>专业</label>@Html.DropDownList("Profession", (IEnumerable<SelectListItem>)ViewBag.Professions, "请选择...", new { @class = "dfselect" })<i> </i></li>
+            <li><label>M专业</label>@Html.DropDownList("MProfession", (IEnumerable<SelectListItem>)ViewBag.MProfessions, "请选择...", new { @class = "dfselect" })<i></i></li>
+            <li><label>技术顾问</label>@Html.DropDownList("Lecturer", (IEnumerable<SelectListItem>)ViewBag.Lecturers, "请选择...", new { @class = "dfselect" })<i></i></li>
+            <li><label>辅导员</label>@Html.DropDownList("Counsellor", (IEnumerable<SelectListItem>)ViewBag.Counsellors, "请选择...", new { @class = "dfselect" })<i></i></li>
+            <li>
+                <label>&nbsp;</label><input name="btnSave" type="submit" class="btn" value="确认保存" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+}

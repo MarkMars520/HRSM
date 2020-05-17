@@ -1,0 +1,102 @@
+﻿@model HRSM.Models.Company
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#companyItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Company/Index";
+        });
+        $("#btnDelete").click(function () {//显示警告对话框
+            $(".tip").fadeIn(200);
+        });
+        $(".tiptop a").click(function () {//关闭对话框
+            $(".tip").fadeOut(200);
+        });
+        $(".sure").click(function () {//点击对话框上确定按钮提交请求
+            $(".tip").fadeOut(100);
+        });
+
+        $(".cancel").click(function () {
+            $(".tip").fadeOut(100);//点击对话框上的取消按钮隐藏对话框
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">招聘企业</a></li>
+        <li><a href="#">删除企业</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        @Html.HiddenFor(model => model.ID)
+        <ul class="forminfo">
+            <li><label>公司名</label><cite>@Model.Title</cite></li>
+            <li><label>城市</label><cite>@Model.City</cite></li>
+            <li><label>面试时间</label><cite>@Model.InterTime</cite></li>
+            <li><label>报名截止时间</label><cite>@Model.StopTime</cite></li>
+            <li><label>网址</label><cite>@Model.URL</cite></li>
+            <li>
+                <label>面试类型</label>
+                @if (Model.InterType == "0")
+                {
+                    <cite>来校</cite>
+                }
+                else if (Model.InterType == "1")
+                {
+                    <cite>视频</cite>
+                }
+                else if (Model.InterType == "2")
+                {
+                    <cite>电话</cite>
+                }
+            </li>
+            <li>
+                <label>状态</label>
+                @if (Model.Statu == "0")
+                {
+                    <cite>招聘中</cite>
+                }
+                else
+                {
+                    <cite>已结束</cite>
+                }
+            </li>
+            <li><label>发布人</label><cite>@Model.Teacher.Name</cite></li>
+            <li><label>公司介绍</label><cite>@Model.Desc</cite></li>
+            <li>
+                <label>&nbsp;</label><input id="btnDelete" name="btnDelete" type="button" class="btn" value="删除" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+
+        <div class="tipinfo">
+            <span><img src="~/images/ticon.png" /></span>
+            <div class="tipright">
+                <p>是否确认对信息的删除 ？</p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+        </div>
+
+        <div class="tipbtn">
+            <input name="" type="submit" class="sure" value="确定" />&nbsp;
+            <input name="" type="button" class="cancel" value="取消" />
+        </div>
+    </div>
+}

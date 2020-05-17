@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#teacherItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Teacher/Index";
+        });
+        CheckForm(); //规则验证
+    });
+    function CheckForm() {
+         //密码验证
+        jQuery.validator.addMethod("pwdReg", function (value, element) {
+            var nameReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
+        return this.optional(element) || nameReg.test(value);
+        }, "错误：英文字母和数字组成的6~20位字符构成！");
+   
+        $("#addFrm").validate({
+            rules: {
+                Name: {required: true,maxlength:20  },//用户名非空,长度不能超过20
+                LoginName: {
+                    required: true,
+                    remote: {
+                        url: '/Teacher/UserHased',
+                        type: 'post',
+                        data: {
+                            LoginName: function () { return $("#LoginName").val(); }
+                        }
+                    }
+                },//登录名非空
+                LoginPwd: { required: true, pwdReg:true },//密码非空,自定义正则规则
+                Roles: { required: true }
+            },
+            messages: {
+                Name: { required: "请输入用户名！", maxlength:"错误：不能超过20个字符" },
+                LoginName: { required: "请输入登录名！",remote:"登录名已存在！" },
+                LoginPwd: { required: "请输入密码！" },
+                Roles: { required: "请输入角色！" },
+            },
+            errorElement: "i",//错误信息显示标签名
+            errorClass: "invalid"//错误信息及标签样式
+           
+        });
+    }
+</script>
+<style type="text/css">
+    .invalid {
+        color: red; /*红色显示*/
+    }
+</style>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">顾问信息</a></li>
+        <li><a href="#">添加顾问</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm("Create","Teacher",FormMethod.Post,new { id="addFrm",name= "addFrm" }))
+{
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        <ul class="forminfo">
+            <li><label>顾问名称</label>@Html.TextBox("Name", "", new { @class = "dfinput" })<i></i></li>
+            <li><label>登录名</label>@Html.TextBox("LoginName", "", new { @class = "dfinput" })<i> </i></li>
+            <li><label>登录密码</label>@Html.TextBox("LoginPwd", "", new { @class = "dfinput" })<i></i></li>
+            <li><label>性别</label>@Html.RadioButton("Sex", "true", new { @checked = "checked" }) 男 @Html.RadioButton("Sex", "false") 女<i><cite>&nbsp;</cite></i></li>
+            <li><label>电话</label>@Html.TextBox("Phone", "", new { @class = "dfinput" })<i></i></li>
+            <li><label>邮箱</label>@Html.TextBox("Email", "", new { @class = "dfinput" })<i></i></li>
+            <li><label>角色</label>@Html.TextBox("Roles", "", new { @class = "dfinput" })<i></i>例如：管理员，就业顾问，技术顾问，辅导员 </li>
+            <li>
+                <label>&nbsp;</label><input name="btnSave" type="submit" class="btn" value="确认保存" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+}
+

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#teacherItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Teacher/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">顾问信息</a></li>
+        <li><a href="#">查看顾问</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>基本信息</span></div>
+    <ul class="forminfo">
+        <li><label>顾问名称</label>@Html.TextBox("Name", ViewBag.Teacher.Name as string, new { @class = "dfinput" ,disabled="disabled"})<i>不能超过20个字符 </i></li>
+        <li><label>登录名</label>@Html.TextBox("LoginName", ViewBag.Teacher.LoginName as string, new { @class = "dfinput", disabled = "disabled" })<i>不能重复 </i></li>
+        <li><label>登录密码</label>@Html.TextBox("LoginPwd", ViewBag.Teacher.LoginPwd as string, new { @class = "dfinput", disabled = "disabled" })<i>至少包含6位特殊数字+字母，不超过20个字符  </i></li>
+        <li>
+            <label>性别</label>
+            @if (ViewBag.Teacher.Sex)
+            {
+                <label>@Html.RadioButton("Sex", "true", new { @checked = "Checked", disabled = "disabled" }) 男 @Html.RadioButton("Sex", "false",new {  disabled = "disabled" }) 女</label>
+            }
+            else
+            {
+                <label>@Html.RadioButton("Sex", "true",new { disabled = "disabled" }) 男 @Html.RadioButton("Sex", "false", new { @checked = "Checked", disabled = "disabled" })女</label>
+            }
+            <i><cite>&nbsp;</cite></i>
+        </li>
+        <li><label>电话</label>@Html.TextBox("Phone", ViewBag.Teacher.Phone as string, new { @class = "dfinput", disabled = "disabled" })<i></i></li>
+        <li><label>邮箱</label>@Html.TextBox("Email", ViewBag.Teacher.Email as string, new { @class = "dfinput", disabled = "disabled" })<i></i></li>
+        <li><label>角色</label>@Html.TextBox("Roles", ViewBag.Teacher.Roles as string, new { @class = "dfinput", disabled = "disabled" })<i>例如：管理员，就业顾问，技术顾问，辅导员 </i></li>
+        <li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="返回" />
+        </li>
+    </ul>
+</div>
+

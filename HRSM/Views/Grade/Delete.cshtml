@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#gradeItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Grade/Index";
+        });
+        $("#btnDelete").click(function () {//显示警告对话框
+            $(".tip").fadeIn(200);
+        });
+        $(".tiptop a").click(function () {//关闭对话框
+            $(".tip").fadeOut(200);
+        });
+        $(".sure").click(function () {//点击对话框上确定按钮提交请求
+            $(".tip").fadeOut(100);
+        });
+
+        $(".cancel").click(function () {
+            $(".tip").fadeOut(100);//点击对话框上的取消按钮隐藏对话框
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">专业班信息</a></li>
+        <li><a href="#">删除专业班</a></li>
+    </ul>
+</div>
+<form method="post">
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        <input type="hidden" name="ID" value="@ViewBag.Grade.ID" /><!--隐藏字典主键ID值-->
+        <ul class="forminfo">
+            <li><label>班名称</label><cite>@ViewBag.Grade.Name</cite></li>
+            <li><label>专业</label><cite>@ViewBag.Grade.Profession</cite></li>
+            <li><label>M专业</label><cite>@ViewBag.Grade.MProfession</cite></li>
+            <li><label>技术顾问</label><cite>@ViewBag.Grade.Teacher1.Name</cite></li>
+            <li><label>辅导员</label><cite>@ViewBag.Grade.Teacher.Name</cite></li>
+            <li>
+                <label>&nbsp;</label><input id="btnDelete" name="btnDelete" type="button" class="btn" value="删除" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+
+        <div class="tipinfo">
+            <span><img src="~/images/ticon.png" /></span>
+            <div class="tipright">
+                <p>是否确认对信息的删除 ？</p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+        </div>
+
+        <div class="tipbtn">
+            <input name="" type="submit" class="sure" value="确定" />&nbsp;
+            <input name="" type="button" class="cancel" value="取消" />
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#dictItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Dict/Index";
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">系统字典</a></li>
+        <li><a href="#">添加字典</a></li>
+    </ul>
+</div>
+<form method="post">
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        <ul class="forminfo">
+            <li><label>代码类型名</label><input name="TypeName" type="text" class="dfinput" /><i>@Html.ValidationMessage("TypeName")</i></li>
+            <li><label>代码名</label><input name="Name" type="text" class="dfinput" /><i>@Html.ValidationMessage("Name") </i></li>
+            <li><label>代码值</label><input name="Value" type="text" class="dfinput" /><i>@Html.ValidationMessage("Value")</i></li>
+            <li><label>顺序</label><input name="Sort" type="text" class="dfinput" /><i>@Html.ValidationMessage("Sort")</i></li>
+            <li>
+                <label>&nbsp;</label><input name="btnSave" type="submit" class="btn" value="确认保存" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+    @Html.ValidationSummary()
+</form>
+
+

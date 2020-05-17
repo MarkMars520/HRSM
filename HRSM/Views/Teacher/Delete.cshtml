@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#teacherItem").addClass("active");
+
+        $("#btnBack").click(function () {
+            window.location = "/Teacher/Index";
+        });
+        $("#btnDelete").click(function () {//显示警告对话框
+            $(".tip").fadeIn(200);
+        });
+        $(".tiptop a").click(function () {//关闭对话框
+            $(".tip").fadeOut(200);
+        });
+        $(".sure").click(function () {//点击对话框上确定按钮提交请求
+            $(".tip").fadeOut(100);
+        });
+
+        $(".cancel").click(function () {
+            $(".tip").fadeOut(100);//点击对话框上的取消按钮隐藏对话框
+        });
+    });
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">顾问信息</a></li>
+        <li><a href="#">删除顾问</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        @Html.Hidden("ID", ViewBag.Teacher.ID as string)
+        <ul class="forminfo">
+            <li><label>顾问名称</label>@Html.TextBox("Name", ViewBag.Teacher.Name as string, new { @class = "dfinput", disabled = "disabled" })<i>不能超过20个字符 </i></li>
+            <li><label>登录名</label>@Html.TextBox("LoginName", ViewBag.Teacher.LoginName as string, new { @class = "dfinput", disabled = "disabled" })<i>不能重复 </i></li>
+            <li><label>登录密码</label>@Html.TextBox("LoginPwd", ViewBag.Teacher.LoginPwd as string, new { @class = "dfinput", disabled = "disabled" })<i>至少包含6位特殊数字+字母，不超过20个字符  </i></li>
+            <li>
+                <label>性别</label>
+                @if (ViewBag.Teacher.Sex)
+                {
+                    <label>@Html.RadioButton("Sex", "true", new { @checked = "Checked", disabled = "disabled" }) 男 @Html.RadioButton("Sex", "false", new { disabled = "disabled" }) 女</label>
+                }
+                else
+                {
+                    <label>@Html.RadioButton("Sex", "true", new { disabled = "disabled" }) 男 @Html.RadioButton("Sex", "false", new { @checked = "Checked", disabled = "disabled" })女</label>
+                }
+                <i><cite>&nbsp;</cite></i>
+            </li>
+            <li><label>电话</label>@Html.TextBox("Phone", ViewBag.Teacher.Phone as string, new { @class = "dfinput", disabled = "disabled" })<i></i></li>
+            <li><label>邮箱</label>@Html.TextBox("Email", ViewBag.Teacher.Email as string, new { @class = "dfinput", disabled = "disabled" })<i></i></li>
+            <li><label>角色</label>@Html.TextBox("Roles", ViewBag.Teacher.Roles as string, new { @class = "dfinput", disabled = "disabled" })<i>例如：管理员，就业顾问，技术顾问，辅导员 </i></li>
+            <li>
+                <label>&nbsp;</label><input id="btnDelete" name="btnDelete" type="button" class="btn" value="删除" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnBack" name="btnBack" type="button" class="btn" value="取消并返回" />
+            </li>
+        </ul>
+    </div>
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+
+        <div class="tipinfo">
+            <span><img src="~/images/ticon.png" /></span>
+            <div class="tipright">
+                <p>是否确认对信息的删除 ？</p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+        </div>
+
+        <div class="tipbtn">
+            <input name="" type="submit" class="sure" value="确定" />&nbsp;
+            <input name="" type="button" class="cancel" value="取消" />
+        </div>
+    </div>
+}

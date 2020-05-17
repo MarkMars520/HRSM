@@ -1,0 +1,49 @@
+﻿@model IEnumerable<HRSM.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        //导航切换
+        $(".menuson li.active").removeClass("active");
+        $("#companyItem").addClass("active");
+        //页面加载时，自动执行默认查询
+        $("#btnSearch").click();
+    })
+</script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">招聘企业</a></li>
+    </ul>
+</div>
+
+<div class="rightinfo" style=" border:0px solid red;">
+    @using (Ajax.BeginForm("Search", "Company", new AjaxOptions
+    {
+        UpdateTargetId = "searchresults",//替换元素id
+        InsertionMode = InsertionMode.Replace,//替换
+        HttpMethod = "GET",//提交方式
+        LoadingElementId = "ajax-loader",//处理过程中友好提示信息元素id
+        OnFailure = "searchFailed"//处理失败执行函数
+    }))
+    {
+        <div class="tools" style=" border:0px solid green;">
+            <ul class="toolbar">
+                <li class=""><a href="/Company/Create"><span><img src="~/images/t01.png" /></span>添加</a></li>
+            </ul>
+            <ul class="toolbar2">
+                <li><label>公司名：</label><input type="text" name="titleS" class="dfinput" /></li>
+                <li>
+                    <span><input type="submit" value="查询" id="btnSearch" /></span>
+                    <img id="ajax-loader" src="~/Images/ajax-loader.gif" style="display:none" />
+                </li>
+            </ul>
+            <div style="clear:both"></div>
+        </div>
+        <div id = "searchresults" ></div >
+    }
+</div>

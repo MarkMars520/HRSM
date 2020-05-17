@@ -1,0 +1,88 @@
+﻿* {
+    padding: 0px;
+    margin: 0px;
+}
+
+#container { /*大盒子样式：1024并居中*/
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+div#copyright {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: url(/images/topbg.gif) repeat-x;
+}
+
+#main {
+    width: 99%;
+    margin: 0 auto;
+    height: 750px;
+    z-index:2;
+}
+
+#menu {
+    float: left;
+    border: 0px solid red;
+    width: 200px;
+    height: 745px;
+}
+
+#content {
+    height: 745px;
+    margin-left: 210px; /*向右偏移210px*/
+}
+
+#menu {
+    border: 2px solid gray;
+}
+/*首页欢迎样式*/
+div.welcome {
+    width: 100%;
+    height: 745px;
+    background-image: url(/images/indexbg.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+    div.welcome > span {
+        font-size: 50px;
+        color: white;
+        display: block;
+        height: 745px;
+        line-height: 745px;
+        text-align: center;
+    }
+    /*#menu > ul {
+        border: 0px solid green;
+    }
+
+        #menu > ul > li {
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #aad0f5;
+            border: 1px solid gray;
+        }
+
+            #menu > ul > li a {
+                padding-left: 10px;
+                font-size: 15px;
+                font-weight: bold;
+                color: blue
+            }
+
+            #menu > ul > li:hover {
+                background-color: #6bc0f7;
+                color: red;
+                border: 2px solid gray;
+            }
+
+                #menu > ul > li:hover a {
+                    font-size: 17px;
+                    color: #6f1fd5;
+                    text-shadow: inherit;
+                }*/
